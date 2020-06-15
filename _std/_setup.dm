@@ -329,6 +329,7 @@
 #define AT_GUNPOINT 1024 	//quick check for guns holding me at gunpoint
 #define IGNORE_SHIFT_CLICK_MODIFIER 2048 //shift+click doesn't retrigger a SHIFT keypress - use for mobs that sprint on shift and not on mobs that use shfit for bolting doors etc
 #define LIGHTWEIGHT_AI_MOB 4096		//not a part of the normal 'mobs' list so it wont show up in searches for observe admin etc, has its own slowed update rate on Life() etc
+#define USR_DIALOG_UPDATES_RANGE 8192	//updateusrdialog will consider this mob as being able to 'attack_ai' and update its ui at range
 
 //object_flags
 #define BOTS_DIRBLOCK 1	//bot considers this solid object that can be opened with a Bump() in pathfinding DirBlockedWithAccess
@@ -976,7 +977,7 @@ proc/default_frequency_color(freq)
 #define SQUARE_TILE_WIDTH 15
 
 //The value of mapvotes. A passive vote is one done through player preferences, an active vote is one where the player actively chooses a map
-#define MAPVOTE_PASSIVE_WEIGHT 0.25
+#define MAPVOTE_PASSIVE_WEIGHT 1.0
 #define MAPVOTE_ACTIVE_WEIGHT 1.0
 //Amount of 1 Second ticks to spend in the pregame lobby before roundstart. Has been 150 seconds for a couple years.
 #define PREGAME_LOBBY_TICKS 150	// raised from 120 to 180 to accomodate the v500 ads, then raised back down to 150 after Z5 was introduced.
@@ -1011,11 +1012,9 @@ proc/default_frequency_color(freq)
 
 
 #if ASS_JAM
+#ifndef TRAVIS_ASSJAM
 #warn Building with ASS_JAM features enabled. Toggle this by changing BUILD_TIME_DAY in __build.dm
-//#else
-//#warn Building with ASS_JAM features disabled. Toggle this by setting BUILD_TIME_DAY == 13 in __build.dm
-//#warn Feel free to ban whoever added the above warning.
-//bluh bluh bluh im a crusty old coder who hates knowing things bluh bluh
+#endif
 #endif
 
 #ifdef Z_LOG_ENABLE
